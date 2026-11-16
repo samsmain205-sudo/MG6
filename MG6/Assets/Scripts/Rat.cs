@@ -24,7 +24,18 @@ public class Rat : MonoBehaviour
         //      more rats. (The spawning logic is written for you.)
         //
         // Also, shrink the original Rat by _shrinkAmount amount.
-        //
+        string tag = collision.gameObject.tag;
+        if (tag == "Attack")
+        {
+            for (int i = 0; i < _spawnAmount; i++)
+            {
+                SpawnSmallRat();
+            }
+            transform.localScale -= new Vector3(_shrinkAmount, _shrinkAmount, 0);
+            SpawnExplosion(_colors[_colorIndex]);
+            _colorIndex = (_colorIndex + 1) % _colors.Length;
+        } 
+
         // STEP 3
         // Additionally, call SpawnExplosion(), and pass in a different color
         //      every time.
@@ -33,7 +44,8 @@ public class Rat : MonoBehaviour
         // Each time the Rat is kicked, the explosion should be a different
         //      color: first yellow, then red, then blue, then looping back
         //      around to yellow, etc.
-
+        
+    
 
         // STEP 2 -------------------------------------------------------------
     }
@@ -59,11 +71,10 @@ public class Rat : MonoBehaviour
         // Uncomment and fix the below lines to give the small rat a random
         //      rotation correctly.
         // Your game should look exaclty like the finished example.
-
-        //float randomAngle = Random.Range(0, 360);
-        //Vector3 rotationAngles = new Vector3(0, randomAngle, 0);
-        //rat.transform.Rotate(rotationAngles);
-
+    
+        float randomAngle = Random.Range(0f, 360f);
+        Vector3 rotationAngles = new Vector3(0f, 0f, randomAngle);
+        rat.transform.Rotate(rotationAngles);
         // STEP 3 -------------------------------------------------------------
     }
 }
